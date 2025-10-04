@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
+from logger import backend_logger
 
 class BackendSettings(BaseSettings):
     app_name: str = Field("HK Housing Agent Backend")
