@@ -1,14 +1,22 @@
-from pydantic import BaseModel, Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field
 
-class BackendSettings(BaseModel):
-    app_name: str = Field("HK Housing Agent Backend", env="APP_NAME")
-    app_description: str = Field("Backend service for HK Housing Agent", env="APP_DESCRIPTION")
-    app_version: str = Field("1.0.0", env="APP_VERSION")
-    host: str = Field("0.0.0.0", env="HOST")
-    port: int = Field(8000, env="PORT")
+class BackendSettings(BaseSettings):
+    app_name: str = Field("HK Housing Agent Backend")
+    app_description: str = Field("Backend service for HK Housing Agent")
+    app_version: str = Field("1.0.0")
+    host: str = Field("0.0.0.0")
+    port: int = Field(8000)
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    openrouter_api_url: str = Field(...)
+    openrouter_api_key: str = Field(...)
+    openrouter_model: str = Field("meta-llama/llama-3.3-8b-instruct:free")
+    
+    model_config = SettingsConfigDict(
+        env_file="src/config/settings.env",
+        env_file_encoding="utf-8",
+        env_prefix="",
+        case_sensitive=False
+    )
 
 settings = BackendSettings()
