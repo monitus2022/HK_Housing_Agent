@@ -23,7 +23,8 @@ class LLMService:
                     "role": "user",
                     "content": prompt
                 }
-            ]
+            ],
+            max_tokens=settings.llm_max_tokens,
         )
         if not response.choices or not response.choices[0].message:
             backend_logger.error("No response from LLM")
