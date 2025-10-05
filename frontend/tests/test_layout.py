@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
+from ui.layout import Layout
 
 
 class TestLayout:
@@ -10,8 +11,6 @@ class TestLayout:
     @patch('ui.layout.st.markdown')
     def test_layout_initialization(self, mock_markdown, mock_title, mock_set_page_config):
         """Test that Layout initializes and calls all setup methods."""
-        from ui.layout import Layout
-        
         layout = Layout()
         
         # Verify set_page_config was called with correct parameters
@@ -33,8 +32,6 @@ class TestLayout:
     @patch('ui.layout.st.markdown')
     def test_set_page_config(self, mock_markdown, mock_title, mock_set_page_config):
         """Test set_page_config method."""
-        from ui.layout import Layout
-        
         Layout.set_page_config()
         
         mock_set_page_config.assert_called_once_with(
@@ -47,8 +44,6 @@ class TestLayout:
     @patch('ui.layout.st.markdown')
     def test_render_title(self, mock_markdown, mock_title, mock_set_page_config):
         """Test render_title method."""
-        from ui.layout import Layout
-        
         Layout.render_title()
         
         mock_title.assert_called_once_with("🏠 Hong Kong Housing Chatbot")
@@ -58,8 +53,6 @@ class TestLayout:
     @patch('ui.layout.st.markdown')
     def test_description(self, mock_markdown, mock_title, mock_set_page_config):
         """Test description method."""
-        from ui.layout import Layout
-        
         Layout.description()
         
         mock_markdown.assert_called_once()

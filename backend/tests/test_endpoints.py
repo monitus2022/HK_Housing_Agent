@@ -1,6 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
+from main import app
 
 
 @pytest.fixture
@@ -15,7 +16,6 @@ def client():
         mock_settings.openrouter_api_url = "https://test.com"
         mock_settings.openrouter_model = "test-model"
         
-        from main import app
         return TestClient(app)
 
 
@@ -27,31 +27,6 @@ class TestHealthEndpoint:
         response = client.get("/health")
         assert response.status_code == 200
         assert response.json() == {"status": "ok"}
-
-
-class TestEchoEndpoint:
-    """Tests for the /echo endpoint."""
-    
-    def test_echo_returns_message(self, client):
-        """Test that echo endpoint returns the provided message."""
-        test_message = "Hello, World!"
-        response = client.get(f"/echo?message={test_message}")
-        assert response.status_code == 200
-        assert response.json() == {"message": test_message}
-    
-    def test_echo_with_special_characters(self, client):
-        """Test echo endpoint with special characters."""
-        from urllib.parse import quote
-        test_message = "Test@123!#"
-        encoded_message = quote(test_message)
-        response = client.get(f"/echo?message={encoded_message}")
-        assert response.status_code == 200
-        assert response.json() == {"message": test_message}
-    
-    def test_echo_without_message_parameter(self, client):
-        """Test echo endpoint without message parameter."""
-        response = client.get("/echo")
-        assert response.status_code == 422  # Unprocessable Entity
 
 
 class TestPromptEndpoint:

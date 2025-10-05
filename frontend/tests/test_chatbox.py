@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
+from ui.chatbox import Chatbox
 
 
 class TestChatbox:
@@ -10,8 +11,6 @@ class TestChatbox:
         """Test that Chatbox initializes correctly."""
         mock_st.session_state = MagicMock()
         mock_st.session_state.__contains__ = MagicMock(return_value=False)
-        
-        from ui.chatbox import Chatbox
         
         chatbox = Chatbox()
         
@@ -24,8 +23,6 @@ class TestChatbox:
         mock_st.session_state = MagicMock()
         mock_st.session_state.__contains__ = MagicMock(return_value=False)
         mock_st.session_state.messages = []
-        
-        from ui.chatbox import Chatbox
         
         chatbox = Chatbox()
         chatbox._init_session()
@@ -42,8 +39,6 @@ class TestChatbox:
         mock_st.session_state = MagicMock()
         mock_st.session_state.__contains__ = MagicMock(return_value=True)
         mock_st.session_state.messages = existing_messages
-        
-        from ui.chatbox import Chatbox
         
         chatbox = Chatbox()
         
@@ -66,8 +61,6 @@ class TestChatbox:
         mock_chat_message.return_value.markdown = MagicMock()
         mock_st.chat_message = mock_chat_message
         
-        from ui.chatbox import Chatbox
-        
         chatbox = Chatbox()
         chatbox.render_chat_history()
         
@@ -83,8 +76,6 @@ class TestChatbox:
         mock_st.session_state.__contains__ = MagicMock(return_value=True)
         mock_st.chat_input = MagicMock(return_value=test_input)
         mock_st.chat_message = MagicMock(return_value=MagicMock())
-        
-        from ui.chatbox import Chatbox
         
         chatbox = Chatbox()
         result = chatbox.get_user_input()
@@ -103,8 +94,6 @@ class TestChatbox:
         mock_st.session_state.__contains__ = MagicMock(return_value=True)
         mock_st.chat_input = MagicMock(return_value=None)
         
-        from ui.chatbox import Chatbox
-        
         chatbox = Chatbox()
         result = chatbox.get_user_input()
         
@@ -120,8 +109,6 @@ class TestChatbox:
         mock_st.session_state.messages = []
         mock_st.session_state.__contains__ = MagicMock(return_value=True)
         mock_st.chat_message = MagicMock(return_value=MagicMock())
-        
-        from ui.chatbox import Chatbox
         
         chatbox = Chatbox()
         chatbox.generate_response(user_input)
@@ -141,8 +128,6 @@ class TestChatbox:
         mock_st.chat_input = MagicMock(return_value=test_input)
         mock_st.chat_message = MagicMock(return_value=MagicMock())
         
-        from ui.chatbox import Chatbox
-        
         chatbox = Chatbox()
         chatbox.run()
         
@@ -157,8 +142,6 @@ class TestChatbox:
         mock_st.session_state.__contains__ = MagicMock(return_value=True)
         mock_st.chat_input = MagicMock(return_value=None)
         mock_st.chat_message = MagicMock(return_value=MagicMock())
-        
-        from ui.chatbox import Chatbox
         
         chatbox = Chatbox()
         chatbox.run()
