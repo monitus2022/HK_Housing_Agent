@@ -1,8 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
-from dotenv import load_dotenv
-
-load_dotenv()
 
 class BackendSettings(BaseSettings):
     app_name: str = Field("HK Housing Agent Backend")
@@ -17,10 +14,7 @@ class BackendSettings(BaseSettings):
     
     llm_max_tokens: int = Field(1024)
     
-    model_config = SettingsConfigDict(
-        env_file_encoding="utf-8",
-        case_sensitive=False
-        )
+    model_config = SettingsConfigDict(case_sensitive=False)
     
 
 settings = BackendSettings()
