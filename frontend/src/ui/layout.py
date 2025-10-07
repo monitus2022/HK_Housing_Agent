@@ -1,4 +1,5 @@
 import streamlit as st
+from config.settings import settings
 
 class Layout:
     def __init__(self):
@@ -8,11 +9,11 @@ class Layout:
 
     @staticmethod
     def set_page_config():
-        st.set_page_config(page_title="Housing Chatbot", layout="wide")
+        st.set_page_config(page_title=settings.app_name, layout="wide")
 
     @staticmethod
     def render_title():
-        st.title("🏠 Hong Kong Housing Chatbot")
+        st.title(f"🏠 {settings.app_name}")
     
     @staticmethod
     def description():

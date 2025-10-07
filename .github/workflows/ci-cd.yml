@@ -1,0 +1,33 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build backend image
+      run: docker build -t hk-housing-backend ./backend
+      
+    - name: Build frontend image
+      run: docker build -t hk-housing-frontend ./frontend
+      
+    - name: Run backend tests
+      run: |
+        docker run --rm hk-housing-backend pytest tests/ -v
+      
+    - name: Run frontend tests
+      run: |
+        docker run --rm hk-housing-frontend pytest tests/ -v
+
+  # Deployment to be added here

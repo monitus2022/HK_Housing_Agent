@@ -3,7 +3,6 @@ __pycache__/
 *.pyc
 testing.*
 *.db
-*.yml
 *.json
 .pytest_cache/
 *.egg-info/
