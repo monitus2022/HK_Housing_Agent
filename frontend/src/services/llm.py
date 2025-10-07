@@ -1,11 +1,13 @@
 import requests
 from typing import Optional
 from logger import frontend_logger
+from config.settings import settings
 
 class LLMService:
     def __init__(self):
-        self.api_url = "0.0.0.0"
-        self.api_port = 8000
+        self.api_url = settings.backend_base_url
+        self.api_port = settings.backend_port
+        self.prompt_endpoint = settings.backend_prompt_endpoint
 
     @staticmethod
     def _make_request(url: str, prompt_params: dict) -> Optional[requests.Response]:
@@ -18,7 +20,7 @@ class LLMService:
             return None
         
     def get_prompt_response(self, prompt: str) -> Optional[str]:
-        url = f"http://{self.api_url}:{self.api_port}/prompt"
+        url = f"{self.api_url}:{self.api_port}{self.prompt_endpoint}"
         prompt_params = {"prompt": prompt}
         response = self._make_request(url, prompt_params=prompt_params)
         if response:
