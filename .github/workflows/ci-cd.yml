@@ -24,10 +24,10 @@ jobs:
       
     - name: Run backend tests
       run: |
-        docker run --rm hk-housing-backend pytest backend/tests/ -v
+        docker run --rm hk-housing-backend pytest tests/ -v
       
     - name: Run frontend tests
       run: |
-        docker run --rm hk-housing-frontend pytest frontend/tests/ -v
+        docker run --rm hk-housing-frontend pytest tests/ -v
 
   # Deployment to be added here
