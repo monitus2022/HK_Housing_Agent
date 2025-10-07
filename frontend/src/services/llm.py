@@ -5,7 +5,7 @@ from config.settings import settings
 
 class LLMService:
     def __init__(self):
-        self.api_url = settings.backend_base_url
+        self.api_url = settings.backend_url
         self.api_port = settings.backend_port
         self.prompt_endpoint = settings.backend_prompt_endpoint
 

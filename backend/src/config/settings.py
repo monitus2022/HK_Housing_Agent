@@ -1,8 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
 from dotenv import load_dotenv
-from pathlib import Path
-import os
 
 load_dotenv()
 
@@ -20,9 +18,8 @@ class BackendSettings(BaseSettings):
     llm_max_tokens: int = Field(1024)
     
     model_config = SettingsConfigDict(
-        env_file=Path(os.getenv("ENV_FILE", ".env")),
         env_file_encoding="utf-8",
-        case_sensitive=False,
+        case_sensitive=False
         )
     
 
