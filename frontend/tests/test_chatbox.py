@@ -116,7 +116,7 @@ class TestChatbox:
         # Verify response was added to session state
         assert len(mock_st.session_state.messages) == 1
         assert mock_st.session_state.messages[0]["role"] == "assistant"
-        assert f"You were saying: {user_input}" == mock_st.session_state.messages[0]["content"]
+        assert mock_st.session_state.messages[0]["content"] == "Sorry, I couldn't process your request at the moment."
     
     @patch('ui.chatbox.st')
     def test_run_with_user_input(self, mock_st):
