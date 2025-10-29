@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.endpoints import router
 from config.settings import settings
+from cloud_storage import StorageManager
 
 app = FastAPI(
     title=settings.app_name,
@@ -18,5 +19,11 @@ app.add_middleware(
 )
 app.include_router(router)
 
+def main():
+    storage_manager = StorageManager()
+    storage_manager.download_all_from_datahub()
+    
+
 if __name__ == "__main__":
+    main()
     uvicorn.run(app, host=settings.host, port=settings.port)
